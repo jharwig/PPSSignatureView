@@ -1,1 +1,4 @@
-iOS Signature View
+SignatureDemo
+=============
+
+iOS Signature Capture Demo
