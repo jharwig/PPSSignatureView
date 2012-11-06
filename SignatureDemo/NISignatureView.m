@@ -3,7 +3,7 @@
 //  SignatureViewTest
 //
 //  Created by Jason Harwig on 11/5/12.
-//  Copyright (c) 2012 Near Infinity Corporation. All rights reserved.
+//  Copyright (c) 2012 Near Infinity Corporation.
 //
 
 #import "NISignatureView.h"
