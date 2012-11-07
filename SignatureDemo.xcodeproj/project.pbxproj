@@ -49,8 +49,8 @@
 		915E0BED1649C3F400B61E2B /* NISignatureViewQuartz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NISignatureViewQuartz.h; path = SignatureDemo/NISignatureViewQuartz.h; sourceTree = "<group>"; };
 		915E0BEE1649C3F400B61E2B /* NISignatureViewQuartz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NISignatureViewQuartz.m; path = SignatureDemo/NISignatureViewQuartz.m; sourceTree = "<group>"; };
 		915E0BF21649C49C00B61E2B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		915E0BF41649E15A00B61E2B /* NISignatureViewQuartzQuadratic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NISignatureViewQuartzQuadratic.h; sourceTree = "<group>"; };
-		915E0BF51649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NISignatureViewQuartzQuadratic.m; sourceTree = "<group>"; };
+		915E0BF41649E15A00B61E2B /* NISignatureViewQuartzQuadratic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NISignatureViewQuartzQuadratic.h; path = SignatureDemo/NISignatureViewQuartzQuadratic.h; sourceTree = "<group>"; };
+		915E0BF51649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NISignatureViewQuartzQuadratic.m; path = SignatureDemo/NISignatureViewQuartzQuadratic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
