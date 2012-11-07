@@ -21,6 +21,9 @@
 		910B8A331649725400E9F361 /* NISignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B8A321649725400E9F361 /* NISignatureView.m */; };
 		910B8A351649728800E9F361 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910B8A341649728800E9F361 /* OpenGLES.framework */; };
 		910B8A371649728F00E9F361 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910B8A361649728F00E9F361 /* GLKit.framework */; };
+		915E0BEF1649C3F400B61E2B /* NISignatureViewQuartz.m in Sources */ = {isa = PBXBuildFile; fileRef = 915E0BEE1649C3F400B61E2B /* NISignatureViewQuartz.m */; };
+		915E0BF31649C49C00B61E2B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915E0BF21649C49C00B61E2B /* QuartzCore.framework */; };
+		915E0BF61649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m in Sources */ = {isa = PBXBuildFile; fileRef = 915E0BF51649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,11 @@
 		910B8A321649725400E9F361 /* NISignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NISignatureView.m; sourceTree = "<group>"; };
 		910B8A341649728800E9F361 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		910B8A361649728F00E9F361 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		915E0BED1649C3F400B61E2B /* NISignatureViewQuartz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NISignatureViewQuartz.h; path = SignatureDemo/NISignatureViewQuartz.h; sourceTree = "<group>"; };
+		915E0BEE1649C3F400B61E2B /* NISignatureViewQuartz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NISignatureViewQuartz.m; path = SignatureDemo/NISignatureViewQuartz.m; sourceTree = "<group>"; };
+		915E0BF21649C49C00B61E2B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		915E0BF41649E15A00B61E2B /* NISignatureViewQuartzQuadratic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NISignatureViewQuartzQuadratic.h; sourceTree = "<group>"; };
+		915E0BF51649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NISignatureViewQuartzQuadratic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				915E0BF31649C49C00B61E2B /* QuartzCore.framework in Frameworks */,
 				910B8A371649728F00E9F361 /* GLKit.framework in Frameworks */,
 				910B8A351649728800E9F361 /* OpenGLES.framework in Frameworks */,
 				910B8A0C1649722700E9F361 /* UIKit.framework in Frameworks */,
@@ -81,6 +90,7 @@
 		910B8A0A1649722700E9F361 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				915E0BF21649C49C00B61E2B /* QuartzCore.framework */,
 				910B8A361649728F00E9F361 /* GLKit.framework */,
 				910B8A341649728800E9F361 /* OpenGLES.framework */,
 				910B8A0B1649722700E9F361 /* UIKit.framework */,
@@ -93,6 +103,7 @@
 		910B8A111649722700E9F361 /* SignatureDemo */ = {
 			isa = PBXGroup;
 			children = (
+				915E0BF11649C40200B61E2B /* Alternatives */,
 				910B8A311649725400E9F361 /* NISignatureView.h */,
 				910B8A321649725400E9F361 /* NISignatureView.m */,
 				910B8A1A1649722700E9F361 /* NIAppDelegate.h */,
@@ -116,6 +127,18 @@
 				910B8A211649722700E9F361 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		915E0BF11649C40200B61E2B /* Alternatives */ = {
+			isa = PBXGroup;
+			children = (
+				915E0BED1649C3F400B61E2B /* NISignatureViewQuartz.h */,
+				915E0BEE1649C3F400B61E2B /* NISignatureViewQuartz.m */,
+				915E0BF41649E15A00B61E2B /* NISignatureViewQuartzQuadratic.h */,
+				915E0BF51649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m */,
+			);
+			name = Alternatives;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +212,8 @@
 				910B8A181649722700E9F361 /* main.m in Sources */,
 				910B8A1C1649722700E9F361 /* NIAppDelegate.m in Sources */,
 				910B8A331649725400E9F361 /* NISignatureView.m in Sources */,
+				915E0BEF1649C3F400B61E2B /* NISignatureViewQuartz.m in Sources */,
+				915E0BF61649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +340,7 @@
 				910B8A301649722700E9F361 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
