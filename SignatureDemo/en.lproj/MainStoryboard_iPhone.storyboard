@@ -36,7 +36,7 @@
             </objects>
             <point key="canvasLocation" x="-104" y="996"/>
         </scene>
-        <!--View Controller - Lines-->
+        <!--View Controller - Connect the Dots-->
         <scene sceneID="hEF-bt-PUb">
             <objects>
                 <viewController id="Ac0-2V-RSk" sceneMemberID="viewController">
@@ -45,7 +45,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Lines" id="UpI-Dz-ojs"/>
+                    <tabBarItem key="tabBarItem" title="Connect the Dots" id="UpI-Dz-ojs"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="599-64-clX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -72,17 +72,6 @@
             <point key="canvasLocation" x="-638" y="-7"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="NISignatureView" superclassName="GLKView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NISignatureView.h"/>
-        </class>
-        <class className="NISignatureViewQuartz" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NISignatureViewQuartz.h"/>
-        </class>
-        <class className="NISignatureViewQuartzQuadratic" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NISignatureViewQuartzQuadratic.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

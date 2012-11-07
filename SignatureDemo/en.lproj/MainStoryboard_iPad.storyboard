@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
-        <!--View Controller - OpenGL-->
+        <!--View Controller - Variable Width-->
         <scene sceneID="E2V-5n-PW7">
             <objects>
                 <viewController id="7Iy-2i-DqV" customClass="GLKViewController" sceneMemberID="viewController">
@@ -13,13 +13,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="OpenGL" id="wju-Xb-h7N"/>
+                    <tabBarItem key="tabBarItem" title="Variable Width" id="wju-Xb-h7N"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UyP-qX-Oxx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="696" y="2572"/>
         </scene>
-        <!--View Controller - Quartz-->
+        <!--View Controller - Connect the Dots-->
         <scene sceneID="ijN-W8-oj5">
             <objects>
                 <viewController id="hPF-mv-AxT" sceneMemberID="viewController">
@@ -28,13 +28,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Quartz" id="jjq-Hh-Epf"/>
+                    <tabBarItem key="tabBarItem" title="Connect the Dots" id="jjq-Hh-Epf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ik-BH-4j8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="648" y="232"/>
         </scene>
-        <!--View Controller - Quartz Quadratic-->
+        <!--View Controller - Quadratic-->
         <scene sceneID="qUQ-Mn-ZM1">
             <objects>
                 <viewController id="JSz-8N-m4B" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Quartz Quadratic" id="dBR-9H-SwH"/>
+                    <tabBarItem key="tabBarItem" title="Quadratic" id="dBR-9H-SwH"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRV-0m-1TY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
