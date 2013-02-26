@@ -12,5 +12,6 @@
 
 
 - (void)erase;
+- (UIImage *) getSignatureImage;
 
 @end
