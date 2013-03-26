@@ -1,5 +1,5 @@
 //
-//  NISignatureView.h
+//  NICSignatureView.h
 //  SignatureViewTest
 //
 //  Created by Jason Harwig on 11/5/12.
@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-@interface NISignatureView : GLKView
+@interface NICSignatureView : GLKView
 
 @property (assign, nonatomic) BOOL hasSignature;
 @property (strong, nonatomic) UIImage *signatureImage;

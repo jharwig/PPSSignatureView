@@ -1,20 +1,20 @@
 //
-//  NISignatureViewQuartz.m
+//  NICSignatureViewQuartz.m
 //  SignatureDemo
 //
 //  Created by Jason Harwig on 11/6/12.
 //  Copyright (c) 2012 Near Infinity Corporation.
 
-#import "NISignatureViewQuartz.h"
+#import "NICSignatureViewQuartz.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface NISignatureViewQuartz () {
+@interface NICSignatureViewQuartz () {
     UIBezierPath *path;    
 }
 
 @end
 
-@implementation NISignatureViewQuartz
+@implementation NICSignatureViewQuartz
 
 - (void)commonInit {
     path = [UIBezierPath bezierPath];

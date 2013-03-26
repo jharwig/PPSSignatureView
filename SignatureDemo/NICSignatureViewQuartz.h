@@ -1,5 +1,5 @@
 //
-//  NISignatureViewQuartzQuadratic.h
+//  NICSignatureViewQuartz.h
 //  SignatureDemo
 //
 //  Created by Jason Harwig on 11/6/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NISignatureViewQuartzQuadratic : UIView
+@interface NICSignatureViewQuartz : UIView
 
 @end

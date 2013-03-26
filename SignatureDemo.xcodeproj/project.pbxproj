@@ -12,18 +12,18 @@
 		910B8A101649722700E9F361 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910B8A0F1649722700E9F361 /* CoreGraphics.framework */; };
 		910B8A161649722700E9F361 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 910B8A141649722700E9F361 /* InfoPlist.strings */; };
 		910B8A181649722700E9F361 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B8A171649722700E9F361 /* main.m */; };
-		910B8A1C1649722700E9F361 /* NIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B8A1B1649722700E9F361 /* NIAppDelegate.m */; };
 		910B8A1E1649722700E9F361 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 910B8A1D1649722700E9F361 /* Default.png */; };
 		910B8A201649722700E9F361 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 910B8A1F1649722700E9F361 /* Default@2x.png */; };
 		910B8A221649722700E9F361 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 910B8A211649722700E9F361 /* Default-568h@2x.png */; };
 		910B8A251649722700E9F361 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 910B8A231649722700E9F361 /* MainStoryboard_iPhone.storyboard */; };
 		910B8A281649722700E9F361 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 910B8A261649722700E9F361 /* MainStoryboard_iPad.storyboard */; };
-		910B8A331649725400E9F361 /* NISignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B8A321649725400E9F361 /* NISignatureView.m */; };
 		910B8A351649728800E9F361 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910B8A341649728800E9F361 /* OpenGLES.framework */; };
 		910B8A371649728F00E9F361 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910B8A361649728F00E9F361 /* GLKit.framework */; };
-		915E0BEF1649C3F400B61E2B /* NISignatureViewQuartz.m in Sources */ = {isa = PBXBuildFile; fileRef = 915E0BEE1649C3F400B61E2B /* NISignatureViewQuartz.m */; };
+		9142E4981701FD93007722BB /* NICSignatureViewQuartz.m in Sources */ = {isa = PBXBuildFile; fileRef = 9142E4951701FD93007722BB /* NICSignatureViewQuartz.m */; };
+		9142E4991701FD93007722BB /* NICSignatureViewQuartzQuadratic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9142E4971701FD93007722BB /* NICSignatureViewQuartzQuadratic.m */; };
+		9142E49E1701FD9B007722BB /* NICAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9142E49B1701FD9B007722BB /* NICAppDelegate.m */; };
+		9142E49F1701FD9B007722BB /* NICSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9142E49D1701FD9B007722BB /* NICSignatureView.m */; };
 		915E0BF31649C49C00B61E2B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915E0BF21649C49C00B61E2B /* QuartzCore.framework */; };
-		915E0BF61649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m in Sources */ = {isa = PBXBuildFile; fileRef = 915E0BF51649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,24 +33,24 @@
 		910B8A0F1649722700E9F361 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		910B8A131649722700E9F361 /* SignatureDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SignatureDemo-Info.plist"; sourceTree = "<group>"; };
 		910B8A151649722700E9F361 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		910B8A171649722700E9F361 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		910B8A171649722700E9F361 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		910B8A191649722700E9F361 /* SignatureDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SignatureDemo-Prefix.pch"; sourceTree = "<group>"; };
-		910B8A1A1649722700E9F361 /* NIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NIAppDelegate.h; sourceTree = "<group>"; };
-		910B8A1B1649722700E9F361 /* NIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NIAppDelegate.m; sourceTree = "<group>"; };
 		910B8A1D1649722700E9F361 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		910B8A1F1649722700E9F361 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		910B8A211649722700E9F361 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		910B8A241649722700E9F361 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		910B8A271649722700E9F361 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		910B8A311649725400E9F361 /* NISignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NISignatureView.h; sourceTree = "<group>"; };
-		910B8A321649725400E9F361 /* NISignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NISignatureView.m; sourceTree = "<group>"; };
 		910B8A341649728800E9F361 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		910B8A361649728F00E9F361 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		915E0BED1649C3F400B61E2B /* NISignatureViewQuartz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NISignatureViewQuartz.h; path = SignatureDemo/NISignatureViewQuartz.h; sourceTree = "<group>"; };
-		915E0BEE1649C3F400B61E2B /* NISignatureViewQuartz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NISignatureViewQuartz.m; path = SignatureDemo/NISignatureViewQuartz.m; sourceTree = "<group>"; };
+		9142E4941701FD93007722BB /* NICSignatureViewQuartz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NICSignatureViewQuartz.h; path = SignatureDemo/NICSignatureViewQuartz.h; sourceTree = "<group>"; };
+		9142E4951701FD93007722BB /* NICSignatureViewQuartz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NICSignatureViewQuartz.m; path = SignatureDemo/NICSignatureViewQuartz.m; sourceTree = "<group>"; };
+		9142E4961701FD93007722BB /* NICSignatureViewQuartzQuadratic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NICSignatureViewQuartzQuadratic.h; path = SignatureDemo/NICSignatureViewQuartzQuadratic.h; sourceTree = "<group>"; };
+		9142E4971701FD93007722BB /* NICSignatureViewQuartzQuadratic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NICSignatureViewQuartzQuadratic.m; path = SignatureDemo/NICSignatureViewQuartzQuadratic.m; sourceTree = "<group>"; };
+		9142E49A1701FD9B007722BB /* NICAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NICAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9142E49B1701FD9B007722BB /* NICAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NICAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		9142E49C1701FD9B007722BB /* NICSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NICSignatureView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9142E49D1701FD9B007722BB /* NICSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NICSignatureView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		915E0BF21649C49C00B61E2B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		915E0BF41649E15A00B61E2B /* NISignatureViewQuartzQuadratic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NISignatureViewQuartzQuadratic.h; path = SignatureDemo/NISignatureViewQuartzQuadratic.h; sourceTree = "<group>"; };
-		915E0BF51649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NISignatureViewQuartzQuadratic.m; path = SignatureDemo/NISignatureViewQuartzQuadratic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,10 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				915E0BF11649C40200B61E2B /* Alternatives */,
-				910B8A311649725400E9F361 /* NISignatureView.h */,
-				910B8A321649725400E9F361 /* NISignatureView.m */,
-				910B8A1A1649722700E9F361 /* NIAppDelegate.h */,
-				910B8A1B1649722700E9F361 /* NIAppDelegate.m */,
+				9142E49A1701FD9B007722BB /* NICAppDelegate.h */,
+				9142E49B1701FD9B007722BB /* NICAppDelegate.m */,
+				9142E49C1701FD9B007722BB /* NICSignatureView.h */,
+				9142E49D1701FD9B007722BB /* NICSignatureView.m */,
 				910B8A231649722700E9F361 /* MainStoryboard_iPhone.storyboard */,
 				910B8A261649722700E9F361 /* MainStoryboard_iPad.storyboard */,
 				910B8A121649722700E9F361 /* Supporting Files */,
@@ -132,10 +132,10 @@
 		915E0BF11649C40200B61E2B /* Alternatives */ = {
 			isa = PBXGroup;
 			children = (
-				915E0BED1649C3F400B61E2B /* NISignatureViewQuartz.h */,
-				915E0BEE1649C3F400B61E2B /* NISignatureViewQuartz.m */,
-				915E0BF41649E15A00B61E2B /* NISignatureViewQuartzQuadratic.h */,
-				915E0BF51649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m */,
+				9142E4941701FD93007722BB /* NICSignatureViewQuartz.h */,
+				9142E4951701FD93007722BB /* NICSignatureViewQuartz.m */,
+				9142E4961701FD93007722BB /* NICSignatureViewQuartzQuadratic.h */,
+				9142E4971701FD93007722BB /* NICSignatureViewQuartzQuadratic.m */,
 			);
 			name = Alternatives;
 			path = ..;
@@ -210,10 +210,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				910B8A181649722700E9F361 /* main.m in Sources */,
-				910B8A1C1649722700E9F361 /* NIAppDelegate.m in Sources */,
-				910B8A331649725400E9F361 /* NISignatureView.m in Sources */,
-				915E0BEF1649C3F400B61E2B /* NISignatureViewQuartz.m in Sources */,
-				915E0BF61649E15A00B61E2B /* NISignatureViewQuartzQuadratic.m in Sources */,
+				9142E4981701FD93007722BB /* NICSignatureViewQuartz.m in Sources */,
+				9142E4991701FD93007722BB /* NICSignatureViewQuartzQuadratic.m in Sources */,
+				9142E49E1701FD9B007722BB /* NICAppDelegate.m in Sources */,
+				9142E49F1701FD9B007722BB /* NICSignatureView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

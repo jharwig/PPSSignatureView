@@ -1,12 +1,12 @@
 //
-//  NISignatureView.m
+//  NICSignatureView.m
 //  SignatureViewTest
 //
 //  Created by Jason Harwig on 11/5/12.
 //  Copyright (c) 2012 Near Infinity Corporation.
 //
 
-#import "NISignatureView.h"
+#import "NICSignatureView.h"
 
 #define             STROKE_WIDTH_MIN 0.002 // Stroke width determined by touch velocity
 #define             STROKE_WIDTH_MAX 0.010
@@ -23,12 +23,12 @@
 static GLKVector3 StrokeColor = { 0, 0, 0 };
 
 // Vertex structure containing 3D point and color
-struct NISignaturePoint
+struct NICSignaturePoint
 {
 	GLKVector3		vertex;
 	GLKVector3		color;
 };
-typedef struct NISignaturePoint NISignaturePoint;
+typedef struct NICSignaturePoint NICSignaturePoint;
 
 
 // Maximum verteces in signature
@@ -36,13 +36,13 @@ static const int maxLength = MAXIMUM_VERTECES;
 
 
 // Append vertex to array buffer
-static inline void addVertex(NSUInteger *length, NISignaturePoint v) {
+static inline void addVertex(NSUInteger *length, NICSignaturePoint v) {
     if ((*length) >= maxLength) {
         return;
     }
     
     GLvoid *data = glMapBufferOES(GL_ARRAY_BUFFER, GL_WRITE_ONLY_OES);
-    memcpy(data + sizeof(NISignaturePoint) * (*length), &v, sizeof(NISignaturePoint));
+    memcpy(data + sizeof(NICSignaturePoint) * (*length), &v, sizeof(NICSignaturePoint));
     glUnmapBufferOES(GL_ARRAY_BUFFER);
     
     (*length)++;
@@ -53,7 +53,7 @@ static float clamp(min, max, value) { return fmaxf(min, fminf(max, value)); }
 
 
 // Find perpendicular vector from two other vectors to compute triangle strip around line
-static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
+static GLKVector3 perpendicular(NICSignaturePoint p1, NICSignaturePoint p2) {
     GLKVector3 ret;
     ret.x = p2.vertex.y - p1.vertex.y;
     ret.y = -1 * (p2.vertex.x - p1.vertex.x);
@@ -62,7 +62,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
 }
 
 
-@interface NISignatureView () {
+@interface NICSignatureView () {
     // OpenGL state
     EAGLContext *context;
     GLKBaseEffect *effect;
@@ -71,7 +71,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
     
     
     // Array of verteces, with current length
-    NISignaturePoint SignatureVertexData[maxLength];
+    NICSignaturePoint SignatureVertexData[maxLength];
     NSUInteger length;
     
     
@@ -83,13 +83,13 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
     // Previous points for quadratic bezier computations
     CGPoint previousPoint;
     CGPoint previousMidPoint;
-    NISignaturePoint previousVertex;
+    NICSignaturePoint previousVertex;
 }
 
 @end
 
 
-@implementation NISignatureView
+@implementation NICSignatureView
 
 
 - (void)commonInit {
@@ -192,7 +192,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
         previousPoint = l;
         previousMidPoint = l;
         
-        NISignaturePoint startPoint = {
+        NICSignaturePoint startPoint = {
             {    (l.x / self.bounds.size.width * 2. - 1), ((l.y / self.bounds.size.height) * 2.0 - 1) * -1, 0}, {1,1,1}
         };
         previousVertex = startPoint;
@@ -227,7 +227,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
                 double x = a * previousMidPoint.x + b * previousPoint.x + c * mid.x;
                 double y = a * previousMidPoint.y + b * previousPoint.y + c * mid.y;
                 
-                NISignaturePoint v = {
+                NICSignaturePoint v = {
                     {
                         (x / self.bounds.size.width * 2. - 1),
                         ((y / self.bounds.size.height) * 2.0 - 1) * -1,
@@ -241,7 +241,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
                 previousVertex = v;
             }
         } else if (distance > 1.0) {
-            NISignaturePoint v = {
+            NICSignaturePoint v = {
                 {    (l.x / self.bounds.size.width * 2. - 1), ((l.y / self.bounds.size.height) * 2.0 - 1) * -1, 0},
                 StrokeColor
             };
@@ -255,7 +255,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
 
     } else if (p.state == UIGestureRecognizerStateEnded | p.state == UIGestureRecognizerStateCancelled) {
 
-        NISignaturePoint v = {
+        NICSignaturePoint v = {
             {    (l.x / self.bounds.size.width * 2. - 1), ((l.y / self.bounds.size.height) * 2.0 - 1) * -1, 0},
             { 1.0, 1.0, 1.0 }
         };
@@ -293,7 +293,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(SignatureVertexData), SignatureVertexData, GL_DYNAMIC_DRAW);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(NISignaturePoint), 0);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(NICSignaturePoint), 0);
     glEnableVertexAttribArray(GLKVertexAttribColor);
     glVertexAttribPointer(GLKVertexAttribColor, 3, GL_FLOAT, GL_FALSE,  6 * sizeof(GLfloat), (char *)12);
     
@@ -316,7 +316,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
 
 
 
-- (void)addTriangleStripPointsForPrevious:(NISignaturePoint)previous next:(NISignaturePoint)next {
+- (void)addTriangleStripPointsForPrevious:(NICSignaturePoint)previous next:(NICSignaturePoint)next {
     float toTravel = penThickness / 2.0;
     
     for (int i = 0; i < 2; i++) {
@@ -332,7 +332,7 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
         difX = difX * ratio;
         difY = difY * ratio;
                 
-        NISignaturePoint stripPoint = {
+        NICSignaturePoint stripPoint = {
             { p1.x + difX, p1.y + difY, 0.0 },
             StrokeColor
         };

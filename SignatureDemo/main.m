@@ -1,6 +1,6 @@
 //
 //  main.m
-//  NISignatureDemo
+//  NICSignatureDemo
 //
 //  Created by Jason Harwig on 11/6/12.
 //  Copyright (c) 2012 Near Infinity Corporation. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "NIAppDelegate.h"
+#import "NICAppDelegate.h"
 
 int main(int argc, char *argv[])
 {

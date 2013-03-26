@@ -1,11 +1,11 @@
 //
-//  NISignatureViewQuartzQuadratic.m
+//  NICSignatureViewQuartzQuadratic.m
 //  SignatureDemo
 //
 //  Created by Jason Harwig on 11/6/12.
 //  Copyright (c) 2012 Near Infinity Corporation.
 
-#import "NISignatureViewQuartzQuadratic.h"
+#import "NICSignatureViewQuartzQuadratic.h"
 #import <QuartzCore/QuartzCore.h>
 
 static CGPoint midpoint(CGPoint p0, CGPoint p1) {
@@ -15,13 +15,13 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1) {
     };
 }
 
-@interface NISignatureViewQuartzQuadratic () {
+@interface NICSignatureViewQuartzQuadratic () {
     UIBezierPath *path;
     CGPoint previousPoint;
 }
 @end
 
-@implementation NISignatureViewQuartzQuadratic
+@implementation NICSignatureViewQuartzQuadratic
 
 - (void)commonInit {
     path = [UIBezierPath bezierPath];

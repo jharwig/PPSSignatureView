@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'NISignatureDemo' target in the 'NISignatureDemo' project
+// Prefix header for all source files of the 'NICSignatureDemo' target in the 'NICSignatureDemo' project
 //
 
 #import <Availability.h>
