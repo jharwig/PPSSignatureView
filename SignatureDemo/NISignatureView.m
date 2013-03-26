@@ -61,36 +61,35 @@ static GLKVector3 perpendicular(NISignaturePoint p1, NISignaturePoint p2) {
     return ret;
 }
 
-@interface NISignatureView ()
 
-@property (assign, nonatomic) BOOL drawnSignature;
+@interface NISignatureView () {
+    // OpenGL state
+    EAGLContext *context;
+    GLKBaseEffect *effect;
+    GLuint vertexArray;
+    GLuint vertexBuffer;
+    
+    
+    // Array of verteces, with current length
+    NISignaturePoint SignatureVertexData[maxLength];
+    NSUInteger length;
+    
+    
+    // Width of line at current and previous vertex
+    float penThickness;
+    float previousThickness;
+    
+    
+    // Previous points for quadratic bezier computations
+    CGPoint previousPoint;
+    CGPoint previousMidPoint;
+    NISignaturePoint previousVertex;
+}
 
 @end
 
+
 @implementation NISignatureView
-
-// OpenGL state
-EAGLContext *context;
-GLKBaseEffect *effect;
-GLuint vertexArray;
-GLuint vertexBuffer;
-
-
-// Array of verteces, with current length
-NISignaturePoint SignatureVertexData[maxLength];
-NSUInteger length;
-
-
-// Width of line at current and previous vertex
-float penThickness;
-float previousThickness;
-
-
-// Previous points for quadratic bezier computations
-CGPoint previousPoint;
-CGPoint previousMidPoint;
-NISignaturePoint previousVertex;
-
 
 
 - (void)commonInit {
@@ -154,11 +153,21 @@ NISignaturePoint previousVertex;
 
 
 - (void)erase {
-    length = 0;
+    length = 0;    
+    self.hasSignature = NO;
 	
 	[self setNeedsDisplay];
 }
 
+
+
+- (UIImage *)signatureImage
+{
+	if (!self.hasSignature)
+		return nil;
+    
+    return [self snapshot];
+}
 
 
 #pragma mark - Gesture Recognizers
@@ -192,7 +201,7 @@ NISignaturePoint previousVertex;
         addVertex(&length, startPoint);
         addVertex(&length, previousVertex);
 		
-		self.drawnSignature = YES;
+		self.hasSignature = YES;
         
     } else if ([p state] == UIGestureRecognizerStateChanged) {
         
@@ -342,55 +351,6 @@ NISignaturePoint previousVertex;
     glDeleteVertexArraysOES(1, &vertexArray);
     
     effect = nil;
-}
-
-- (UIImage *) getSignatureImage
-{
-	if (!self.drawnSignature)
-		return nil;
-	
-	CGFloat width = self.frame.size.width;
-	CGFloat height = self.frame.size.height;
-	NSInteger myDataLength = width * height * 4;
-
-	// allocate array and read pixels into it.
-	GLubyte *buffer = (GLubyte *) malloc(myDataLength);
-	glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-
-	// gl renders "upside down" so swap top to bottom into new array.
-	// there's gotta be a better way, but this works.
-	GLubyte *buffer2 = (GLubyte *) malloc(myDataLength);
-	for(int y = 0; y < height; y++) {
-		for(int x = 0; x < width * 4; x++) {
-			buffer2[(((int)height - 1) - y) * (int)width * 4 + x] = buffer[y * 4 * (int)width + x];
-		}
-	}
-
-	// make data provider with data.
-	CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer2, myDataLength, NULL);
-
-	// prep the ingredients
-	int bitsPerComponent = 8;
-	int bitsPerPixel = 32;
-	int bytesPerRow = 4 * width;
-	CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-	CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
-	CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-
-	// make the cgimage
-	CGImageRef imageRef = CGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpaceRef, bitmapInfo, provider, NULL, NO, renderingIntent);
-
-	// then make the uiimage from that
-	UIImage *myImage = [[UIImage alloc] initWithCGImage:imageRef];
-
-	// release memory
-	CGImageRelease(imageRef);
-	CGColorSpaceRelease(colorSpaceRef);
-	CGDataProviderRelease(provider);
-	free(buffer);
-	free(buffer2);
-
-	return myImage;
 }
 
 @end

@@ -15,9 +15,13 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1) {
     };
 }
 
+@interface NISignatureViewQuartzQuadratic () {
+    UIBezierPath *path;
+    CGPoint previousPoint;
+}
+@end
+
 @implementation NISignatureViewQuartzQuadratic
-UIBezierPath *path;
-CGPoint previousPoint;
 
 - (void)commonInit {
     path = [UIBezierPath bezierPath];

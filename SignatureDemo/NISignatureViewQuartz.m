@@ -8,8 +8,13 @@
 #import "NISignatureViewQuartz.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface NISignatureViewQuartz () {
+    UIBezierPath *path;    
+}
+
+@end
+
 @implementation NISignatureViewQuartz
-UIBezierPath *path;
 
 - (void)commonInit {
     path = [UIBezierPath bezierPath];

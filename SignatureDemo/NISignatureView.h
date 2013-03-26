@@ -10,8 +10,9 @@
 
 @interface NISignatureView : GLKView
 
+@property (assign, nonatomic) BOOL hasSignature;
+@property (strong, nonatomic) UIImage *signatureImage;
 
 - (void)erase;
-- (UIImage *) getSignatureImage;
 
 @end
