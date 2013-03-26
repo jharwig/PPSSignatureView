@@ -73,12 +73,11 @@ static GLKVector3 perpendicular(NICSignaturePoint p1, NICSignaturePoint p2) {
 }
 
 static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVector3 color) {
-    
-    float heightToWidth = bounds.size.height / bounds.size.width;
+
     return (NICSignaturePoint) {
         {
             (viewPoint.x / bounds.size.width * 2.0 - 1),
-            ((viewPoint.y / bounds.size.height) * (heightToWidth * 2) - heightToWidth) * -1,
+            ((viewPoint.y / bounds.size.height) * 2.0 - 1) * -1,
             0
         },
         color
@@ -256,6 +255,8 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
+    
+    [self setNeedsDisplay];
 }
 
 
@@ -266,9 +267,6 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 - (void)pan:(UIPanGestureRecognizer *)p {
     
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    
-    
-
     
     CGPoint v = [p velocityInView:self];
     CGPoint l = [p locationInView:self];
@@ -393,9 +391,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 
     // Perspective
-    float heightToWidth = self.bounds.size.height / self.bounds.size.width;
-    
-    GLKMatrix4 ortho = GLKMatrix4MakeOrtho(-1, 1, -heightToWidth, heightToWidth, 0.1f, 2.0f);
+    GLKMatrix4 ortho = GLKMatrix4MakeOrtho(-1, 1, -1, 1, 0.1f, 2.0f);
     effect.transform.projectionMatrix = ortho;
     
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -1.0f);
