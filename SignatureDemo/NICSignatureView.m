@@ -140,15 +140,19 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         // Capture touches
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
         pan.maximumNumberOfTouches = pan.minimumNumberOfTouches = 1;
+        pan.cancelsTouchesInView = YES;
         [self addGestureRecognizer:pan];
         
         // For dotting your i's
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        tap.cancelsTouchesInView = YES;
         [self addGestureRecognizer:tap];
         
         // Erase with long press
-        [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)]];
-
+        UILongPressGestureRecognizer *longer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+        longer.cancelsTouchesInView = YES;
+        [self addGestureRecognizer:longer];
+        
     } else [NSException raise:@"NSOpenGLES2ContextException" format:@"Failed to create OpenGL ES2 context"];
 }
 
