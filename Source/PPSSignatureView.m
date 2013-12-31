@@ -1,12 +1,4 @@
-//
-//  NICSignatureView.m
-//  SignatureViewTest
-//
-//  Created by Jason Harwig on 11/5/12.
-//  Copyright (c) 2012 Near Infinity Corporation.
-//
-
-#import "NICSignatureView.h"
+#import "PPSSignatureView.h"
 
 #define             STROKE_WIDTH_MIN 0.002 // Stroke width determined by touch velocity
 #define             STROKE_WIDTH_MAX 0.010
@@ -23,12 +15,12 @@
 static GLKVector3 StrokeColor = { 0, 0, 0 };
 
 // Vertex structure containing 3D point and color
-struct NICSignaturePoint
+struct PPSSignaturePoint
 {
 	GLKVector3		vertex;
 	GLKVector3		color;
 };
-typedef struct NICSignaturePoint NICSignaturePoint;
+typedef struct PPSSignaturePoint PPSSignaturePoint;
 
 
 // Maximum verteces in signature
@@ -36,13 +28,13 @@ static const int maxLength = MAXIMUM_VERTECES;
 
 
 // Append vertex to array buffer
-static inline void addVertex(NSUInteger *length, NICSignaturePoint v) {
+static inline void addVertex(uint *length, PPSSignaturePoint v) {
     if ((*length) >= maxLength) {
         return;
     }
     
     GLvoid *data = glMapBufferOES(GL_ARRAY_BUFFER, GL_WRITE_ONLY_OES);
-    memcpy(data + sizeof(NICSignaturePoint) * (*length), &v, sizeof(NICSignaturePoint));
+    memcpy(data + sizeof(PPSSignaturePoint) * (*length), &v, sizeof(PPSSignaturePoint));
     glUnmapBufferOES(GL_ARRAY_BUFFER);
     
     (*length)++;
@@ -64,7 +56,7 @@ static float clamp(min, max, value) { return fmaxf(min, fminf(max, value)); }
 
 
 // Find perpendicular vector from two other vectors to compute triangle strip around line
-static GLKVector3 perpendicular(NICSignaturePoint p1, NICSignaturePoint p2) {
+static GLKVector3 perpendicular(PPSSignaturePoint p1, PPSSignaturePoint p2) {
     GLKVector3 ret;
     ret.x = p2.vertex.y - p1.vertex.y;
     ret.y = -1 * (p2.vertex.x - p1.vertex.x);
@@ -72,9 +64,9 @@ static GLKVector3 perpendicular(NICSignaturePoint p1, NICSignaturePoint p2) {
     return ret;
 }
 
-static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVector3 color) {
+static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVector3 color) {
 
-    return (NICSignaturePoint) {
+    return (PPSSignaturePoint) {
         {
             (viewPoint.x / bounds.size.width * 2.0 - 1),
             ((viewPoint.y / bounds.size.height) * 2.0 - 1) * -1,
@@ -85,7 +77,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 }
 
 
-@interface NICSignatureView () {
+@interface PPSSignatureView () {
     // OpenGL state
     EAGLContext *context;
     GLKBaseEffect *effect;
@@ -97,11 +89,11 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     
     
     // Array of verteces, with current length
-    NICSignaturePoint SignatureVertexData[maxLength];
-    NSUInteger length;
+    PPSSignaturePoint SignatureVertexData[maxLength];
+    uint length;
     
-    NICSignaturePoint SignatureDotsData[maxLength];
-    NSUInteger dotsLength;
+    PPSSignaturePoint SignatureDotsData[maxLength];
+    uint dotsLength;
     
     
     // Width of line at current and previous vertex
@@ -112,14 +104,14 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     // Previous points for quadratic bezier computations
     CGPoint previousPoint;
     CGPoint previousMidPoint;
-    NICSignaturePoint previousVertex;
-    NICSignaturePoint currentVelocity;
+    PPSSignaturePoint previousVertex;
+    PPSSignaturePoint currentVelocity;
 }
 
 @end
 
 
-@implementation NICSignatureView
+@implementation PPSSignatureView
 
 
 - (void)commonInit {
@@ -227,10 +219,10 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     if (t.state == UIGestureRecognizerStateRecognized) {
         glBindBuffer(GL_ARRAY_BUFFER, dotsBuffer);
         
-        NICSignaturePoint touchPoint = ViewPointToGL(l, self.bounds, (GLKVector3){1, 1, 1});
+        PPSSignaturePoint touchPoint = ViewPointToGL(l, self.bounds, (GLKVector3){1, 1, 1});
         addVertex(&dotsLength, touchPoint);
         
-        NICSignaturePoint centerPoint = touchPoint;
+        PPSSignaturePoint centerPoint = touchPoint;
         centerPoint.color = StrokeColor;
         addVertex(&dotsLength, centerPoint);
 
@@ -241,7 +233,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         
         for (int i = 0; i <= segments; i++) {
             
-            NICSignaturePoint p = centerPoint;
+            PPSSignaturePoint p = centerPoint;
             p.vertex.x += velocityRadius.x * cosf(angle);
             p.vertex.y += velocityRadius.y * sinf(angle);
             
@@ -290,7 +282,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         previousPoint = l;
         previousMidPoint = l;
         
-        NICSignaturePoint startPoint = ViewPointToGL(l, self.bounds, (GLKVector3){1, 1, 1});
+        PPSSignaturePoint startPoint = ViewPointToGL(l, self.bounds, (GLKVector3){1, 1, 1});
         previousVertex = startPoint;
         previousThickness = penThickness;
         
@@ -319,14 +311,14 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
                 
                 CGPoint quadPoint = QuadraticPointInCurve(previousMidPoint, mid, previousPoint, (float)i / (float)(segments));
                 
-                NICSignaturePoint v = ViewPointToGL(quadPoint, self.bounds, StrokeColor);
+                PPSSignaturePoint v = ViewPointToGL(quadPoint, self.bounds, StrokeColor);
                 [self addTriangleStripPointsForPrevious:previousVertex next:v];
                 
                 previousVertex = v;
             }
         } else if (distance > 1.0) {
             
-            NICSignaturePoint v = ViewPointToGL(l, self.bounds, StrokeColor);
+            PPSSignaturePoint v = ViewPointToGL(l, self.bounds, StrokeColor);
             [self addTriangleStripPointsForPrevious:previousVertex next:v];
             
             previousVertex = v;            
@@ -338,7 +330,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
     } else if (p.state == UIGestureRecognizerStateEnded | p.state == UIGestureRecognizerStateCancelled) {
         
-        NICSignaturePoint v = ViewPointToGL(l, self.bounds, (GLKVector3){1, 1, 1});
+        PPSSignaturePoint v = ViewPointToGL(l, self.bounds, (GLKVector3){1, 1, 1});
         addVertex(&length, v);
         
         previousVertex = v;
@@ -354,7 +346,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 - (void)bindShaderAttributes {
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(NICSignaturePoint), 0);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(PPSSignaturePoint), 0);
     glEnableVertexAttribArray(GLKVertexAttribColor);
     glVertexAttribPointer(GLKVertexAttribColor, 3, GL_FLOAT, GL_FALSE,  6 * sizeof(GLfloat), (char *)12);
 }
@@ -404,7 +396,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 
 
-- (void)addTriangleStripPointsForPrevious:(NICSignaturePoint)previous next:(NICSignaturePoint)next {
+- (void)addTriangleStripPointsForPrevious:(PPSSignaturePoint)previous next:(PPSSignaturePoint)next {
     float toTravel = penThickness / 2.0;
     
     for (int i = 0; i < 2; i++) {
@@ -420,7 +412,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         difX = difX * ratio;
         difY = difY * ratio;
                 
-        NICSignaturePoint stripPoint = {
+        PPSSignaturePoint stripPoint = {
             { p1.x + difX, p1.y + difY, 0.0 },
             StrokeColor
         };
