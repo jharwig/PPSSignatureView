@@ -1,1 +1,1 @@
-pod 'PPSSignatureView', :path => '~/Documents/Code/workspace/work/PPSSignatureView/PPSSignatureView.podspec'
+pod 'PPSSignatureView', :path => '../PPSSignatureView.podspec'
