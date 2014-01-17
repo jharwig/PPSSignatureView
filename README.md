@@ -2,8 +2,8 @@
 
 Techniques are described in blog entry: [Capture a Signature on iOS](https://www.altamiracorp.com/blog/employee-posts/capture-a-signature-on-ios)
 
-[![Version](//cocoapod-badges.herokuapp.com/v/PPSSignatureView/badge.png)](//cocoadocs.org/docsets/PPSSignatureView)
-[![Platform](//cocoapod-badges.herokuapp.com/p/PPSSignatureView/badge.png)](//cocoadocs.org/docsets/PPSSignatureView)
+[![Version](https://cocoapod-badges.herokuapp.com/v/PPSSignatureView/badge.png)](https://cocoadocs.org/docsets/PPSSignatureView)
+[![Platform](https://cocoapod-badges.herokuapp.com/p/PPSSignatureView/badge.png)](https://cocoadocs.org/docsets/PPSSignatureView)
 
 ## Usage
 
