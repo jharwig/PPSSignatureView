@@ -1,7 +1,7 @@
 #import "PPSSignatureView.h"
 
-#define             STROKE_WIDTH_MIN 0.002 // Stroke width determined by touch velocity
-#define             STROKE_WIDTH_MAX 0.010
+#define             STROKE_WIDTH_MIN 0.004 // Stroke width determined by touch velocity
+#define             STROKE_WIDTH_MAX 0.030
 #define       STROKE_WIDTH_SMOOTHING 0.5   // Low pass filter alpha
 
 #define           VELOCITY_CLAMP_MIN 20
@@ -13,6 +13,7 @@
 
 
 static GLKVector3 StrokeColor = { 0, 0, 0 };
+static float clearColor[4] = { 1, 1, 1, 0 };
 
 // Vertex structure containing 3D point and color
 struct PPSSignaturePoint
@@ -120,6 +121,9 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     if (context) {
         time(NULL);
         
+        self.backgroundColor = [UIColor whiteColor];
+        self.opaque = NO;
+        
         self.context = context;
         self.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 		self.enableSetNeedsDisplay = YES;
@@ -172,7 +176,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 - (void)drawRect:(CGRect)rect
 {
-    glClearColor(1, 1, 1, 1.0f);
+    glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
     glClear(GL_COLOR_BUFFER_BIT);
 
     [effect prepareToDraw];
@@ -187,7 +191,6 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         glBindVertexArrayOES(dotsArray);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, dotsLength);
     }
-
 }
 
 
@@ -205,8 +208,17 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 {
 	if (!self.hasSignature)
 		return nil;
+
+//    self.hidden = YES;
+//
+//    self.strokeColor = [UIColor whiteColor];
+//    [self setNeedsDisplay];
+    UIImage *screenshot = [self snapshot];
     
-    return [self snapshot];
+//    self.strokeColor = nil;
+//
+//    self.hidden = NO;
+    return screenshot;
 }
 
 
@@ -341,14 +353,44 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 }
 
 
+- (void)setStrokeColor:(UIColor *)strokeColor {
+    _strokeColor = strokeColor;
+    [self updateStrokeColor];
+}
+
 
 #pragma mark - Private
+
+- (void)updateStrokeColor {
+    CGFloat red, green, blue, alpha, white;
+    if (effect && self.strokeColor && [self.strokeColor getRed:&red green:&green blue:&blue alpha:&alpha]) {
+        effect.constantColor = GLKVector4Make(red, green, blue, alpha);
+    } else if (effect && self.strokeColor && [self.strokeColor getWhite:&white alpha:&alpha]) {
+        effect.constantColor = GLKVector4Make(white, white, white, alpha);
+    } else effect.constantColor = GLKVector4Make(0,0,0,1);
+}
+
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [super setBackgroundColor:backgroundColor];
+    
+    CGFloat red, green, blue, alpha, white;
+    if ([backgroundColor getRed:&red green:&green blue:&blue alpha:&alpha]) {
+        clearColor[0] = red;
+        clearColor[1] = green;
+        clearColor[2] = blue;
+    } else if ([backgroundColor getWhite:&white alpha:&alpha]) {
+        clearColor[0] = white;
+        clearColor[1] = white;
+        clearColor[2] = white;
+    }
+}
 
 - (void)bindShaderAttributes {
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(PPSSignaturePoint), 0);
-    glEnableVertexAttribArray(GLKVertexAttribColor);
-    glVertexAttribPointer(GLKVertexAttribColor, 3, GL_FLOAT, GL_FALSE,  6 * sizeof(GLfloat), (char *)12);
+//    glEnableVertexAttribArray(GLKVertexAttribColor);
+//    glVertexAttribPointer(GLKVertexAttribColor, 3, GL_FLOAT, GL_FALSE,  6 * sizeof(GLfloat), (char *)12);
 }
 
 - (void)setupGL
@@ -356,6 +398,9 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     [EAGLContext setCurrentContext:context];
     
     effect = [[GLKBaseEffect alloc] init];
+    
+    [self updateStrokeColor];
+
     
     glDisable(GL_DEPTH_TEST);
     
@@ -427,8 +472,11 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 {
     [EAGLContext setCurrentContext:context];
     
-    glDeleteBuffers(1, &vertexBuffer);
     glDeleteVertexArraysOES(1, &vertexArray);
+    glDeleteBuffers(1, &vertexBuffer);
+    
+    glDeleteVertexArraysOES(1, &dotsArray);
+    glDeleteBuffers(1, &dotsBuffer);
     
     effect = nil;
 }
