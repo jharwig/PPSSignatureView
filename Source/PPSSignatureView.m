@@ -54,7 +54,7 @@ static inline CGPoint QuadraticPointInCurve(CGPoint start, CGPoint end, CGPoint 
 }
 
 static float generateRandom(float from, float to) { return random() % 10000 / 10000.0 * (to - from) + from; }
-static float clamp(min, max, value) { return fmaxf(min, fminf(max, value)); }
+static float clamp(float min, float max, float value) { return fmaxf(min, fminf(max, value)); }
 
 
 // Find perpendicular vector from two other vectors to compute triangle strip around line
@@ -244,8 +244,11 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         addVertex(&dotsLength, centerPoint);
 
         static int segments = 20;
-        GLKVector2 radius = (GLKVector2){ penThickness * 2.0 * generateRandom(0.5, 1.5), penThickness * 2.0 * generateRandom(0.5, 1.5) };
-        GLKVector2 velocityRadius = radius;//GLKVector2Multiply(radius, GLKVector2MultiplyScalar(GLKVector2Normalize((GLKVector2){currentVelocity.vertex.y, currentVelocity.vertex.x}), 1.0));
+        GLKVector2 radius = (GLKVector2){
+            clamp(0.00001, 0.02, penThickness * generateRandom(0.5, 1.5)),
+            clamp(0.00001, 0.02, penThickness * generateRandom(0.5, 1.5))
+        };
+        GLKVector2 velocityRadius = radius;
         float angle = 0;
         
         for (int i = 0; i <= segments; i++) {
@@ -291,7 +294,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     float normalizedVelocity = (clampedVelocityMagnitude - VELOCITY_CLAMP_MIN) / (VELOCITY_CLAMP_MAX - VELOCITY_CLAMP_MIN);
     
     float lowPassFilterAlpha = STROKE_WIDTH_SMOOTHING;
-    float newThickness = (STROKE_WIDTH_MAX - STROKE_WIDTH_MIN) * normalizedVelocity + STROKE_WIDTH_MIN;
+    float newThickness = (STROKE_WIDTH_MAX - STROKE_WIDTH_MIN) * (1 - normalizedVelocity) + STROKE_WIDTH_MIN;
     penThickness = penThickness * lowPassFilterAlpha + newThickness * (1 - lowPassFilterAlpha);
     
     if ([p state] == UIGestureRecognizerStateBegan) {
