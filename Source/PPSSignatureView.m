@@ -291,7 +291,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     float normalizedVelocity = (clampedVelocityMagnitude - VELOCITY_CLAMP_MIN) / (VELOCITY_CLAMP_MAX - VELOCITY_CLAMP_MIN);
     
     float lowPassFilterAlpha = STROKE_WIDTH_SMOOTHING;
-    float newThickness = (STROKE_WIDTH_MAX - STROKE_WIDTH_MIN) * normalizedVelocity + STROKE_WIDTH_MIN;
+    float newThickness = (STROKE_WIDTH_MAX - STROKE_WIDTH_MIN) * (1 - normalizedVelocity) + STROKE_WIDTH_MIN;
     penThickness = penThickness * lowPassFilterAlpha + newThickness * (1 - lowPassFilterAlpha);
     
     if ([p state] == UIGestureRecognizerStateBegan) {
