@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PPSSignatureView"
-  s.version      = "0.1.0"
+  s.version      = "0.1.2"
   s.summary      = "Signature pad"
   s.description  = <<-DESC
                     Signature Pad to capture a users signature.

@@ -1,1 +1,1 @@
-pod 'PPSSignatureView'
+pod 'PPSSignatureView', '~> 0.1.2'
