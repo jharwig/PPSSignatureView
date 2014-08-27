@@ -1,0 +1,14 @@
+PODS:
+  - PPSSignatureView (0.1.2)
+
+DEPENDENCIES:
+  - PPSSignatureView (from `../PPSSignatureView.podspec`)
+
+EXTERNAL SOURCES:
+  PPSSignatureView:
+    :path: ../PPSSignatureView.podspec
+
+SPEC CHECKSUMS:
+  PPSSignatureView: 0f9ea27f72f45a9d6a7b9e7a9b7db1c1b91c547c
+
+COCOAPODS: 0.33.1
