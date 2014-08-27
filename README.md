@@ -9,7 +9,6 @@ Techniques are described in blog entry: [Capture a Signature on iOS](https://www
 
 Connect the `PPSSignatureView` to the `view` property of a `GLKViewController` (or subclass).
 
-## Requirements
 
 ## Installation
 
@@ -27,3 +26,6 @@ Jason Harwig ( jason@pinepointsoftware.com )
 
 PPSSignatureView is available under the MIT license. See the LICENSE file for more info.
 
+## Screenshot
+
+![](https://raw.githubusercontent.com/jharwig/PPSSignatureView/master/Example/signature-letter-j-opengl.png)
