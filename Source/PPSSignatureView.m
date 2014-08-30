@@ -226,6 +226,13 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     return screenshot;
 }
 
+#pragma mark - Properties
+
+-(NSUInteger)vertexCount
+{
+    return length;
+}
+
 
 #pragma mark - Gesture Recognizers
 
@@ -273,7 +280,8 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 
 - (void)longPress:(UILongPressGestureRecognizer *)lp {
-    [self erase];
+    if(self.longPressToEraseEnabled)
+        [self erase];
 }
 
 - (void)pan:(UIPanGestureRecognizer *)p {
@@ -358,6 +366,9 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     }
     
 	[self setNeedsDisplay];
+    
+    if(self.signatureViewDelegate)
+        [self.signatureViewDelegate signatureDidChange:self];
 }
 
 
@@ -370,7 +381,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 #pragma mark - Private
 
 - (void)updateStrokeColor {
-    CGFloat red, green, blue, alpha, white;
+    CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0, white = 0.0;
     if (effect && self.strokeColor && [self.strokeColor getRed:&red green:&green blue:&blue alpha:&alpha]) {
         effect.constantColor = GLKVector4Make(red, green, blue, alpha);
     } else if (effect && self.strokeColor && [self.strokeColor getWhite:&white alpha:&alpha]) {
