@@ -387,10 +387,12 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         clearColor[0] = red;
         clearColor[1] = green;
         clearColor[2] = blue;
+        clearColor[3] = alpha;
     } else if ([backgroundColor getWhite:&white alpha:&alpha]) {
         clearColor[0] = white;
         clearColor[1] = white;
         clearColor[2] = white;
+        clearColor[3] = alpha;
     }
 }
 
