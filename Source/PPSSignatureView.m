@@ -2,7 +2,7 @@
 #import <OpenGLES/ES2/glext.h>
 
 #define             STROKE_WIDTH_MIN 0.004 // Stroke width determined by touch velocity
-#define             STROKE_WIDTH_MAX 0.030
+#define     DEFAULT_STROKE_WIDTH_MAX 0.010
 #define       STROKE_WIDTH_SMOOTHING 0.5   // Low pass filter alpha
 
 #define           VELOCITY_CLAMP_MIN 20
@@ -128,6 +128,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         self.context = context;
         self.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 		self.enableSetNeedsDisplay = YES;
+		self.strokeMaxWidth = DEFAULT_STROKE_WIDTH_MAX;
         
         // Turn on antialiasing
         self.drawableMultisample = GLKViewDrawableMultisample4X;
@@ -302,7 +303,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     float normalizedVelocity = (clampedVelocityMagnitude - VELOCITY_CLAMP_MIN) / (VELOCITY_CLAMP_MAX - VELOCITY_CLAMP_MIN);
     
     float lowPassFilterAlpha = STROKE_WIDTH_SMOOTHING;
-    float newThickness = (STROKE_WIDTH_MAX - STROKE_WIDTH_MIN) * (1 - normalizedVelocity) + STROKE_WIDTH_MIN;
+    float newThickness = (self.strokeMaxWidth - STROKE_WIDTH_MIN) * (1 - normalizedVelocity) + STROKE_WIDTH_MIN;
     penThickness = penThickness * lowPassFilterAlpha + newThickness * (1 - lowPassFilterAlpha);
     
     if ([p state] == UIGestureRecognizerStateBegan) {

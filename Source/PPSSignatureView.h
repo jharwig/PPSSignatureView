@@ -10,6 +10,7 @@
 @property (strong, nonatomic) UIImage *signatureImage;
 @property(assign, nonatomic) BOOL longPressToEraseEnabled;
 @property(nonatomic,readonly) NSUInteger vertexCount;
+@property(assign,nonatomic) float strokeMaxWidth;
 @property(weak, nonatomic)id<PPSSignatureViewDelegate> signatureViewDelegate;
 
 - (void)erase;
