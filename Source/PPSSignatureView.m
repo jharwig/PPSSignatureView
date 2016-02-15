@@ -57,7 +57,7 @@ static inline void addVertex(GLvoid *mappedBuffer, uint *length, PPSSignaturePoi
     (*length)++;
 }
 
-static inline void unmapVertexBuffer(GLuint *mappedBuffer) {
+static inline void unmapVertexBuffer(GLvoid *mappedBuffer) {
     if (mappedBuffer != NULL) {
         GLboolean result = glUnmapBufferOES(GL_ARRAY_BUFFER);
 
@@ -260,7 +260,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
     if (t.state == UIGestureRecognizerStateRecognized) {
         NSError *error;
-        GLuint *mappedBuffer = mapVertexBuffer(dotsBuffer, &error);
+        GLvoid *mappedBuffer = mapVertexBuffer(dotsBuffer, &error);
 
         if (mappedBuffer == NULL) {
             // TODO(rgrimm): Handle the error condition
@@ -309,7 +309,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 - (void)pan:(UIPanGestureRecognizer *)p {
 
     NSError *error;
-    GLuint *mappedBuffer = mapVertexBuffer(vertexBuffer, &error);
+    GLvoid *mappedBuffer = mapVertexBuffer(vertexBuffer, &error);
 
     if (mappedBuffer == NULL) {
         // TODO(rgrimm): Handle the error condition
@@ -484,7 +484,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     previousPoint = CGPointMake(-100, -100);
 }
 
-- (void)addTriangleStripPointsInMappedBuffer:(GLuint *)mappedBuffer previous:(PPSSignaturePoint)previous next:(PPSSignaturePoint)next {
+- (void)addTriangleStripPointsInMappedBuffer:(GLvoid *)mappedBuffer previous:(PPSSignaturePoint)previous next:(PPSSignaturePoint)next {
     float toTravel = penThickness / 2.0;
 
     for (int i = 0; i < 2; i++) {
