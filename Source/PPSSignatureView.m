@@ -41,7 +41,7 @@ static inline GLvoid *mapVertexBuffer(GLuint bufferToMap, NSError **error) {
         NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
         userInfo[@"GL_ERROR"] = @(glError);
 
-        *error = [[NSError alloc] initWithDomain:@"PPSSignatureView" code:ERROR_OPENGL userInfo:userInfo];
+        *error = [NSError errorWithDomain:@"PPSSignatureVire" code:ERROR_OPENGL userInfo:userInfo];
     }
 
     return data;
