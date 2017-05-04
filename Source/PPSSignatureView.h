@@ -3,9 +3,10 @@
 
 @interface PPSSignatureView : GLKView
 
+@property (assign, nonatomic) float rotationScaleRatio;
 @property (assign, nonatomic) UIColor *strokeColor;
-@property (assign, nonatomic) BOOL hasSignature;
-@property (strong, nonatomic) UIImage *signatureImage;
+@property (readonly, nonatomic) BOOL hasSignature;
+@property (readonly, nonatomic) UIImage *signatureImage;
 
 - (void)erase;
 
