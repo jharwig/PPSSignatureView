@@ -1,1 +1,3 @@
-pod 'PPSSignatureView', :path => '../PPSSignatureView.podspec'
+target 'PPSSignatureDemo' do
+  pod 'PPSSignatureView', :path => '../PPSSignatureView.podspec'
+end

@@ -45,6 +45,10 @@
     [self setNeedsDisplay];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self setNeedsDisplay];
+}
 
 - (void)pan:(UIPanGestureRecognizer *)pan {
     CGPoint currentPoint = [pan locationInView:self];

@@ -11,6 +11,7 @@
 #define QUADRATIC_DISTANCE_TOLERANCE 3.0   // Minimum distance to make a curve
 
 #define             MAXIMUM_VERTECES 100000
+#define					   BASE_SIZE 300
 
 
 static GLKVector3 StrokeColor = { 0, 0, 0 };
@@ -53,6 +54,20 @@ static inline CGPoint QuadraticPointInCurve(CGPoint start, CGPoint end, CGPoint 
     };
 }
 
+static inline GLKMatrix4 GLKMatrix4MakeTranslationAndScale(float tx, float ty, float tz, float sx, float sy, float sz)
+{
+    GLKMatrix4 m = GLKMatrix4Identity;
+    m.m[12] = tx;
+    m.m[13] = ty;
+    m.m[14] = tz;
+
+    m.m[0] = sx;
+    m.m[5] = sy;
+    m.m[10] = sz;
+
+    return m;
+}
+
 static float generateRandom(float from, float to) { return random() % 10000 / 10000.0 * (to - from) + from; }
 static float clamp(float min, float max, float value) { return fmaxf(min, fminf(max, value)); }
 
@@ -68,14 +83,17 @@ static GLKVector3 perpendicular(PPSSignaturePoint p1, PPSSignaturePoint p2) {
 
 static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVector3 color) {
 
-    return (PPSSignaturePoint) {
-        {
-            (viewPoint.x / bounds.size.width * 2.0 - 1),
-            ((viewPoint.y / bounds.size.height) * 2.0 - 1) * -1,
-            0
-        },
-        color
-    };
+    float width = bounds.size.width / BASE_SIZE;
+	float height = bounds.size.height / BASE_SIZE;
+
+	return (PPSSignaturePoint) {
+		{
+			(viewPoint.x / bounds.size.width * (width * 2.0) - width),
+			((viewPoint.y / bounds.size.height) * (height * 2.0) - height) * -1,
+			0
+		},
+		color
+	};
 }
 
 
@@ -115,6 +133,8 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 @implementation PPSSignatureView
 
+@synthesize hasSignature;
+
 
 - (void)commonInit {
     context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -128,6 +148,8 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         self.context = context;
         self.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 		self.enableSetNeedsDisplay = YES;
+
+        self.rotationScaleRatio = 0.7f;
         
         // Turn on antialiasing
         self.drawableMultisample = GLKViewDrawableMultisample4X;
@@ -168,6 +190,14 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 }
 
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+
+    [self setProjectionMatrix];
+}
+
+
 - (void)dealloc
 {
     [self tearDownGL];
@@ -176,6 +206,25 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         [EAGLContext setCurrentContext:nil];
     }
 	context = nil;
+}
+
+- (void)setProjectionMatrix
+{
+    float width = self.bounds.size.width / BASE_SIZE;
+    float height = self.bounds.size.height / BASE_SIZE;
+
+    GLKMatrix4 ortho = GLKMatrix4MakeOrtho(-width, width, -height, height, 0.1f, 2.0f);
+    effect.transform.projectionMatrix = ortho;
+
+    if (width > height) {
+        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslationAndScale(0.0f, 0.0f, -1.0f,
+                                                                       self.rotationScaleRatio, self.rotationScaleRatio, 1.0f);
+        effect.transform.modelviewMatrix = modelViewMatrix;
+    } else {
+        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslationAndScale(0.0f, 0.0f, -1.0f,
+                                                                       1.0f, 1.0f, 1.0f);
+        effect.transform.modelviewMatrix = modelViewMatrix;
+    }
 }
 
 
@@ -202,7 +251,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 - (void)erase {
     length = 0;
     dotsLength = 0;
-    self.hasSignature = NO;
+    hasSignature = NO;
 	
 	[self setNeedsDisplay];
 }
@@ -309,7 +358,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         addVertex(&length, startPoint);
         addVertex(&length, previousVertex);
 		
-		self.hasSignature = YES;
+		hasSignature = YES;
         
     } else if ([p state] == UIGestureRecognizerStateChanged) {
         
@@ -436,11 +485,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 
     // Perspective
-    GLKMatrix4 ortho = GLKMatrix4MakeOrtho(-1, 1, -1, 1, 0.1f, 2.0f);
-    effect.transform.projectionMatrix = ortho;
-    
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -1.0f);
-    effect.transform.modelviewMatrix = modelViewMatrix;
+    [self setProjectionMatrix];
     
     length = 0;
     penThickness = 0.003;
