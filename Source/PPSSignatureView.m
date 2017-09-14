@@ -200,6 +200,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 
 - (void)erase {
+    [self.signatureViewDelegate didClearSignature];
     length = 0;
     dotsLength = 0;
     self.hasSignature = NO;
@@ -298,7 +299,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
     penThickness = penThickness * lowPassFilterAlpha + newThickness * (1 - lowPassFilterAlpha);
     
     if ([p state] == UIGestureRecognizerStateBegan) {
-        
+        [self.signatureViewDelegate didStartSigning];
         previousPoint = l;
         previousMidPoint = l;
         
@@ -349,6 +350,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         previousMidPoint = mid;
 
     } else if (p.state == UIGestureRecognizerStateEnded | p.state == UIGestureRecognizerStateCancelled) {
+        [self.signatureViewDelegate didEndSigning];
         
         PPSSignaturePoint v = ViewPointToGL(l, self.bounds, (GLKVector3){1, 1, 1});
         addVertex(&length, v);

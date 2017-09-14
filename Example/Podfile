@@ -1,1 +1,8 @@
-pod 'PPSSignatureView', :path => '../PPSSignatureView.podspec'
+platform :ios, '9.0'
+
+target 'PPSSignatureDemo' do
+  use_frameworks!
+
+  pod 'PPSSignatureView', :path => '../'
+end
+

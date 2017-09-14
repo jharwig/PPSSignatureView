@@ -7,7 +7,7 @@
 //
 
 #import "PPSAppDelegate.h"
-#import <PPSSignatureView.h>
+#import "PPSSignatureView.h"
 
 @implementation PPSAppDelegate
 
